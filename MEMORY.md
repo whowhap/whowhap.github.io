@@ -44,13 +44,13 @@
 
 | 항목 | 상태 |
 |---|---|
-| 현재 상태 | `READY` |
+| 현재 상태 | `HITL_REQUIRED` |
 | 완료한 루프 | 1. 저장소 및 기존 파일 확인 후 기본 정적 구조 생성<br>2. 프로페셔널 웹사이트 기본 구조, 반응형 내비게이션, 지렁이 게임 초안 구현 |
-| 다음 루프 | 프로필 콘텐츠 확정 또는 게임 세부 조정 |
+| 다음 루프 | GitHub 저장소 권한 문제 해결 후 배포 재시도 |
 | 현재 Retry 횟수 | 0 |
-| 현재 오류 fingerprint | 없음 |
-| Blocker | 없음 |
-| 마지막 정상 상태 | 데스크톱 및 모바일 브라우저 검증에서 기본 사이트와 게임이 정상 동작함 |
+| 현재 오류 fingerprint | `GITHUB_PERMISSION|push origin HEAD:main|403 Permission denied|deploy` |
+| Blocker | GitHub 저장소 권한 부족으로 `git push` 실패 |
+| 마지막 정상 상태 | 로컬 브라우저 검증에서 기본 사이트와 게임이 정상 동작함 |
 
 ## Guardrails
 
@@ -150,3 +150,16 @@
 | 종료 상태 | `PASSED` |
 | 다음 작업 | 실제 개인 콘텐츠 확정 및 필요 시 게임 고급 기능 추가 |
 | 사람 확인 필요 항목 | 이름, 소개, 경력, 프로젝트의 실제 내용 / Step 1의 `[게임 추가 기능:]` / Claude 로그인 상태 |
+
+## Latest Deployment Attempt
+
+| 항목 | 기록 |
+|---|---|
+| commit hash | `4ee5e7d` |
+| 대상 저장소 | `https://github.com/theseob/theseob.github.io.git` |
+| 예상 GitHub Pages 주소 | `https://theseob.github.io` |
+| Verifier | `git add`, `git commit`, `git push origin HEAD:main` |
+| 결과 | `git commit` 성공, `git push` 실패 |
+| 실패 원인 | GitHub 권한 부족: `Permission to theseob/theseob.github.io.git denied to whowhap` |
+| 종료 상태 | `HITL_REQUIRED` |
+| 사람 확인 필요 항목 | 이 저장소에 대한 write 권한이 있는 GitHub 토큰 또는 저장소 접근 권한 |
